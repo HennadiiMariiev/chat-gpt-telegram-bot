@@ -1,0 +1,32 @@
+{
+  "name": "chatgpt-telegram-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon ./src/app.ts",
+    "start": "ts-node ./src/app.ts",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint --fix . --ext .ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.5",
+    "eslint": "^8.36.0",
+    "eslint-config-standard": "^17.0.0",
+    "nodemon": "^2.0.21",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "@types/mongoose": "^5.11.97",
+    "@types/node-telegram-bot-api": "^0.61.4",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "mongoose": "^7.0.3",
+    "node-telegram-bot-api": "^0.61.0",
+    "openai": "^3.2.1"
+  }
+}
