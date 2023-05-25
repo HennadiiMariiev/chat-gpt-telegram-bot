@@ -1,5 +1,6 @@
 import { ObjectId } from "mongoose";
 
+const MAX_STR_LENGTH = 4096;
 export interface IQuery {
   _id: ObjectId;
   text: string;
@@ -20,7 +21,11 @@ const prepareHistory = (queries: IQuery[]) => {
     str += dateStr + sign + queries[i].text + "\n";
   }
 
-  return str;
+  if (str.length < MAX_STR_LENGTH) {
+    return str;
+  }
+
+  return str?.slice(0, MAX_STR_LENGTH - 5) + "...";
 };
 
 export default prepareHistory;

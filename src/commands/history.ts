@@ -7,18 +7,22 @@ import prepareUserInfo from "../utils/prepareUserInfo";
 
 const history = (bot: TelegramApi) => async (message: TelegramApi.Message) => {
   const chatId = message.chat.id;
-  const user = prepareUserInfo(message);
-  bot.sendChatAction(chatId, "typing");
+  try {
+    const user = prepareUserInfo(message);
+    bot.sendChatAction(chatId, "typing");
 
-  const queries = await QueryService.getUserQueries({ id: user.inner_id });
+    const queries = await QueryService.getUserQueries({ id: user.inner_id });
 
-  if (!queries) {
-    return await bot.sendMessage(chatId, messages.error);
+    if (!queries) {
+      return await bot.sendMessage(chatId, messages.error);
+    }
+
+    const reply = prepareHistory(queries as unknown as IQuery[]);
+
+    await bot.sendMessage(chatId, reply, { parse_mode: "HTML" });
+  } catch (error) {
+    await bot.sendMessage(chatId, messages.error, { parse_mode: "HTML" });
   }
-
-  const reply = prepareHistory(queries as unknown as IQuery[]);
-
-  await bot.sendMessage(chatId, reply, { parse_mode: "HTML" });
 };
 
 export default history;
