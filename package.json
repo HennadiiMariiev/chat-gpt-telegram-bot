@@ -2,10 +2,11 @@
   "name": "chatgpt-telegram-bot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "app.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon ./src/app.ts",
-    "start": "ts-node ./src/app.ts",
+    "build": "tsc",
+    "start": "node ./build/app.js",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint --fix . --ext .ts"
   },
