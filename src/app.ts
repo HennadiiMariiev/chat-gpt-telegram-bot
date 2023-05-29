@@ -14,6 +14,8 @@ import message from "./commands/message";
 import limit from "./commands/limit";
 import audio from "./commands/audio";
 import info from "./commands/info";
+import request_clear from "./commands/request_clear";
+import callback_query from "./commands/callback_query";
 
 const configuration = new Configuration(BOT_CONFIG);
 
@@ -41,6 +43,8 @@ bot.onText(new RegExp(actions.limit.action), limit(bot));
 bot.onText(new RegExp(actions.limit.text), limit(bot));
 bot.onText(new RegExp(actions.history.action), history(bot));
 bot.onText(new RegExp(actions.history.text), history(bot));
+bot.onText(new RegExp(actions.clear.action), request_clear(bot));
+bot.onText(new RegExp(actions.clear.text), request_clear(bot));
 bot.onText(new RegExp(actions.info.action), info(bot));
 bot.onText(new RegExp(actions.info.text), info(bot));
 
@@ -48,7 +52,8 @@ bot.onText(new RegExp(actions.info.text), info(bot));
 bot.onText(new RegExp(actions.magic.action), refreshUserLimit(bot));
 
 // Handlers
-bot.on("voice", audio(bot, openAI));
+bot.on("voice", audio(bot));
 bot.on("message", message(bot, openAI));
+bot.on("callback_query", (query) => callback_query(query, bot));
 
 process.on("SIGINT", closeDbConnection);

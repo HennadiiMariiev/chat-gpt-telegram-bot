@@ -25,6 +25,10 @@ const actions = {
     text: "📄 Chat History",
     action: "/history",
   },
+  clear: {
+    text: "🧹 Clear Chat History",
+    action: "/clear",
+  },
   info: {
     text: "ℹ️ Info",
     action: "/info",

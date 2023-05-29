@@ -10,8 +10,9 @@ const menuOptions: SendMessageOptions = {
       ],
       [
         { callback_data: "/history", text: "📄 Chat History" },
-        { callback_data: "/info", text: "ℹ️ Info" },
+        { callback_data: "/clear", text: "🧹 Clear Chat History" },
       ],
+      [{ callback_data: "/info", text: "ℹ️ Info" }],
     ],
   },
   parse_mode: "HTML",
@@ -32,6 +33,7 @@ const buttonMenu = [
   { command: "/menu", description: "#️⃣ Menu" },
   { command: "/ask", description: "❔ Ask ChatGPT" },
   { command: "/history", description: "📄 Chat History" },
+  { command: "/clear", description: "🧹 Clear Chat History" },
   { command: "/info", description: "ℹ️ Info" },
   { command: "/limit", description: "🤌🏻 AI requests limit" },
 ];

@@ -2,7 +2,7 @@ import TelegramApi from "node-telegram-bot-api";
 import { UserService } from "../db/services";
 
 import { mainMenu } from "../config/bot_menu";
-import prepareUserInfo from "../utils/prepareUserInfo";
+import { prepareUserInfo } from "../utils/prepareUserInfo";
 import messages from "../config/bot_messages";
 import { OWNER_ID } from "../config/config";
 

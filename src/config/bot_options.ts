@@ -10,8 +10,9 @@ export const menuOptions: SendMessageOptions = {
       ],
       [
         { callback_data: "/history", text: "📄 Chat History" },
-        { callback_data: "/info", text: "ℹ️ Info" },
+        { callback_data: "/clear", text: "🧹 Clear Chat History" },
       ],
+      [{ callback_data: "/info", text: "ℹ️ Info" }],
     ],
   },
   parse_mode: "HTML",

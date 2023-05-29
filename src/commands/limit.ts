@@ -1,7 +1,7 @@
 import TelegramApi from "node-telegram-bot-api";
 
 import { UserService } from "../db/services";
-import prepareUserInfo from "../utils/prepareUserInfo";
+import { prepareUserInfo } from "../utils/prepareUserInfo";
 
 const limit = (bot: TelegramApi) => async (message: TelegramApi.Message) => {
   const chatId = message.chat.id;

@@ -12,7 +12,6 @@ const getMe = (bot: TelegramBot) => {
       if (!cache.me) {
         const me = await bot.getMe();
 
-        console.log("getMe", me);
         cache.me = me?.username as string;
       }
       return cache.me;

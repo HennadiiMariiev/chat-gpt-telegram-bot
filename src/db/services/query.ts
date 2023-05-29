@@ -43,4 +43,21 @@ const getUserQueries = async ({ id }: { id: string }) => {
   }
 };
 
-export { addQuery, getUserQueries };
+const deleteUserQueries = async ({ id }: { id: string }) => {
+  try {
+    const user = await User.findOne({ inner_id: id });
+    if (!user) {
+      return null;
+    }
+
+    const queries = await Query.deleteMany({ user: user._id });
+
+    return { success: true };
+  } catch (error) {
+    console.log(error);
+
+    return { success: false, error };
+  }
+};
+
+export { addQuery, getUserQueries, deleteUserQueries };

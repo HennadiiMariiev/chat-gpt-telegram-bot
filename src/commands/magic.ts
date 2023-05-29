@@ -2,7 +2,7 @@ import TelegramApi from "node-telegram-bot-api";
 
 import { UserService } from "../db/services";
 import { MAGIC_STICKER_ID } from "../config/bot_constants";
-import prepareUserInfo from "../utils/prepareUserInfo";
+import { prepareUserInfo } from "../utils/prepareUserInfo";
 import messages from "../config/bot_messages";
 
 const refreshUserLimit = (bot: TelegramApi) => async (message: TelegramApi.Message) => {

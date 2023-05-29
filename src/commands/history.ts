@@ -3,7 +3,7 @@ import TelegramApi from "node-telegram-bot-api";
 import messages from "../config/bot_messages";
 import { QueryService } from "../db/services";
 import prepareHistory, { IQuery } from "../utils/prepareHistory";
-import prepareUserInfo from "../utils/prepareUserInfo";
+import { prepareUserInfo } from "../utils/prepareUserInfo";
 
 const history = (bot: TelegramApi) => async (message: TelegramApi.Message) => {
   const chatId = message.chat.id;
@@ -19,7 +19,15 @@ const history = (bot: TelegramApi) => async (message: TelegramApi.Message) => {
 
     const reply = prepareHistory(queries as unknown as IQuery[]);
 
-    await bot.sendMessage(chatId, reply, { parse_mode: "HTML" });
+    if (Array.isArray(reply)) {
+      for (let i = 0; i < reply.length; i += 1) {
+        await bot.sendMessage(chatId, reply[i], { parse_mode: "HTML" });
+      }
+    }
+
+    if (typeof reply === "string") {
+      await bot.sendMessage(chatId, reply, { parse_mode: "HTML" });
+    }
   } catch (error) {
     await bot.sendMessage(chatId, messages.error, { parse_mode: "HTML" });
   }

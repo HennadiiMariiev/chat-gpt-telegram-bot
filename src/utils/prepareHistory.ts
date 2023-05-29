@@ -21,11 +21,15 @@ const prepareHistory = (queries: IQuery[]) => {
     str += dateStr + sign + queries[i].text + "\n";
   }
 
-  if (str.length < MAX_STR_LENGTH) {
-    return str;
+  if (str.length >= MAX_STR_LENGTH) {
+    const strArr: string[] = [];
+    for (let i = 0; i < str.length; i += MAX_STR_LENGTH) {
+      strArr.push(str.slice(i, i + MAX_STR_LENGTH));
+    }
+    return strArr;
   }
 
-  return str?.slice(0, MAX_STR_LENGTH - 5) + "...";
+  return str;
 };
 
 export default prepareHistory;

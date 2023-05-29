@@ -9,4 +9,13 @@ const prepareUserInfo = (message: TelegramApi.Message) => {
   };
 };
 
-export default prepareUserInfo;
+const prepareFromQueryInfo = (from: TelegramApi.User) => {
+  return {
+    inner_id: from?.id!?.toString(),
+    first_name: from?.first_name!,
+    username: from?.username!,
+    is_bot: from?.is_bot!,
+  };
+};
+
+export { prepareUserInfo, prepareFromQueryInfo };

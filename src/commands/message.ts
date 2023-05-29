@@ -6,7 +6,7 @@ import getChatResponse from "../chatGPT/getResponse";
 import actions from "../config/bot_actions";
 import replyMessages from "../config/bot_messages";
 import { QueryService } from "../db/services";
-import prepareUserInfo from "../utils/prepareUserInfo";
+import { prepareUserInfo } from "../utils/prepareUserInfo";
 import getPrompt from "../utils/getPrompt";
 import getEmbedding from "../chatGPT/getEmbedding";
 import getTextAndActionValues from "../utils/getTextAndActionValues";
