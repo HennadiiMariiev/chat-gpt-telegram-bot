@@ -1,6 +1,7 @@
 import TelegramApi from "node-telegram-bot-api";
 
 import messages from "../config/bot_messages";
+import { ERROR_STICKER_ID } from "../config/bot_constants";
 
 const request_clear = (bot: TelegramApi) => async (message: TelegramApi.Message) => {
   const chatId = message.chat.id;
@@ -17,6 +18,7 @@ const request_clear = (bot: TelegramApi) => async (message: TelegramApi.Message)
 
     bot.sendMessage(chatId, messageText, { reply_markup: keyboard });
   } catch (error) {
+    await bot.sendAnimation(chatId, ERROR_STICKER_ID);
     await bot.sendMessage(chatId, messages.error, { parse_mode: "HTML" });
   }
 };

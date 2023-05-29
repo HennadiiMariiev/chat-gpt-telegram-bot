@@ -21,8 +21,8 @@ const menuOptions: SendMessageOptions = {
 const mainMenu: SendMessageOptions = {
   reply_markup: {
     keyboard: [
-      [{ text: "#️⃣ Menu" }],
-      [{ text: "❔ Ask ChatGPT" }, { text: "📄 Chat History" }],
+      [{ text: "❔ Ask ChatGPT" }],
+      [{ text: "📄 Chat History" }, { text: "🧹 Clear Chat History" }],
       [{ text: "🤌🏻 Limit" }, { text: "ℹ️ Info" }],
     ],
   },

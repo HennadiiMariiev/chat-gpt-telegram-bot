@@ -11,6 +11,7 @@ import getPrompt from "../utils/getPrompt";
 import getEmbedding from "../chatGPT/getEmbedding";
 import getTextAndActionValues from "../utils/getTextAndActionValues";
 import { MIN_MESSAGE_LENGTH } from "../config/config";
+import { ERROR_STICKER_ID, PLEASE_STICKER_ID } from "../config/bot_constants";
 
 const menuValues = getTextAndActionValues();
 
@@ -35,13 +36,16 @@ const message = (bot: TelegramApi, openAI: OpenAIApi) => async (message: Telegra
       return await processTextQuery(bot, message, openAI, true);
     }
     if (message?.voice) {
-      return await bot.sendMessage(chatId, replyMessages.audio, { parse_mode: "Markdown" });
+      return;
     }
 
     bot.sendChatAction(chatId, "typing");
-    await bot.sendMessage(chatId, replyMessages.short_message, { parse_mode: "Markdown" });
+
+    await bot.sendAnimation(chatId, PLEASE_STICKER_ID);
+    await bot.sendMessage(chatId, replyMessages.short_message, { parse_mode: "HTML" });
   } catch (error) {
-    await bot.sendMessage(chatId, replyMessages.error, { parse_mode: "Markdown" });
+    await bot.sendAnimation(chatId, ERROR_STICKER_ID);
+    await bot.sendMessage(chatId, replyMessages.error, { parse_mode: "HTML" });
   }
 };
 

@@ -4,6 +4,7 @@ import messages from "../config/bot_messages";
 import { QueryService } from "../db/services";
 import prepareHistory, { IQuery } from "../utils/prepareHistory";
 import { prepareUserInfo } from "../utils/prepareUserInfo";
+import { ERROR_STICKER_ID } from "../config/bot_constants";
 
 const history = (bot: TelegramApi) => async (message: TelegramApi.Message) => {
   const chatId = message.chat.id;
@@ -29,6 +30,7 @@ const history = (bot: TelegramApi) => async (message: TelegramApi.Message) => {
       await bot.sendMessage(chatId, reply, { parse_mode: "HTML" });
     }
   } catch (error) {
+    await bot.sendAnimation(chatId, ERROR_STICKER_ID);
     await bot.sendMessage(chatId, messages.error, { parse_mode: "HTML" });
   }
 };
