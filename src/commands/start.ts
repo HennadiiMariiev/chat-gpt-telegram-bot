@@ -17,7 +17,7 @@ const start = (bot: TelegramApi) => async (message: TelegramApi.Message) => {
   bot.sendChatAction(chatId, "typing");
 
   await UserService.addNewUser(user);
-  await bot.sendMessage(OWNER_ID!, msgToOwner, {
+  await bot.sendMessage(OWNER_ID as string, msgToOwner, {
     parse_mode: "HTML",
   });
   await bot.sendMessage(chatId, messages.welcome, mainMenu);

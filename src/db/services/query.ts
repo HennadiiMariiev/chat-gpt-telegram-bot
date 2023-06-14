@@ -50,7 +50,7 @@ const deleteUserQueries = async ({ id }: { id: string }) => {
       return null;
     }
 
-    const queries = await Query.deleteMany({ user: user._id });
+    await Query.deleteMany({ user: user._id });
 
     return { success: true };
   } catch (error) {

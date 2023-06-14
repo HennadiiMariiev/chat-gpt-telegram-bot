@@ -5,7 +5,7 @@ import clear from "./clear";
 import { ERROR_STICKER_ID } from "../config/bot_constants";
 
 const callback_query = async (query: TelegramApi.CallbackQuery, bot: TelegramApi) => {
-  const chatId = query?.message?.chat.id;
+  const chatId = query?.message?.chat.id as number;
   try {
     const from = query?.from;
 
@@ -14,19 +14,19 @@ const callback_query = async (query: TelegramApi.CallbackQuery, bot: TelegramApi
 
     switch (buttonClicked) {
       case "accept_clear":
-        await clear(bot, chatId!, from!);
-        bot.deleteMessage(chatId!, Number(messageId));
+        await clear(bot, chatId, from);
+        bot.deleteMessage(chatId, Number(messageId));
         break;
       case "decline_clear":
         bot.editMessageText("You clicked ❌ No", { chat_id: chatId, message_id: Number(messageId) });
         break;
       default:
-        bot.sendMessage(chatId!, messages.invalid_button);
+        bot.sendMessage(chatId, messages.invalid_button);
         break;
     }
   } catch (error) {
-    await bot.sendAnimation(chatId!, ERROR_STICKER_ID);
-    await bot.sendMessage(chatId!, messages.error, { parse_mode: "HTML" });
+    await bot.sendAnimation(chatId, ERROR_STICKER_ID);
+    await bot.sendMessage(chatId, messages.error, { parse_mode: "HTML" });
   }
 };
 
