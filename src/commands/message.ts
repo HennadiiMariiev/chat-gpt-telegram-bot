@@ -11,6 +11,7 @@ import getPrompt from "../utils/getPrompt";
 import getTextAndActionValues from "../utils/getTextAndActionValues";
 import { MIN_MESSAGE_LENGTH } from "../config/config";
 import { ERROR_STICKER_ID, PLEASE_STICKER_ID } from "../config/bot_constants";
+import prepareReply from "../utils/prepareReply";
 
 const menuValues = getTextAndActionValues();
 
@@ -66,7 +67,16 @@ async function processTextQuery(
   const messageStr = isFullMessage ? fullMessage : prompt;
   const response = await getChatResponse(messageStr as string, openAI);
 
-  await bot.sendMessage(chatId, (response as string) ?? replyMessages.error, { parse_mode: "Markdown" });
+  const reply = prepareReply(response as string);
+
+  if (Array.isArray(reply)) {
+    for (let i = 0; i < reply.length; i += 1) {
+      await bot.sendMessage(chatId, reply[i], { parse_mode: "HTML" });
+    }
+    return;
+  }
+
+  await bot.sendMessage(chatId, reply ?? replyMessages.error, { parse_mode: "Markdown" });
 }
 
 async function processImageQuery(bot: TelegramApi, message: TelegramApi.Message, openAI: OpenAIApi) {

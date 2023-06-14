@@ -1,6 +1,5 @@
 import { ObjectId } from "mongoose";
-
-const MAX_STR_LENGTH = 4096;
+import { MAX_STR_LENGTH } from "../config/bot_constants";
 export interface IQuery {
   _id: ObjectId;
   text: string;
@@ -23,9 +22,11 @@ const prepareHistory = (queries: IQuery[]) => {
 
   if (str.length >= MAX_STR_LENGTH) {
     const strArr: string[] = [];
+
     for (let i = 0; i < str.length; i += MAX_STR_LENGTH) {
       strArr.push(str.slice(i, i + MAX_STR_LENGTH));
     }
+
     return strArr;
   }
 
